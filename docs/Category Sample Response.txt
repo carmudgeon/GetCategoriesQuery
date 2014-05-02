@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetCategoriesResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+  <Timestamp>2014-05-01T12:45:49.064Z</Timestamp>
+  <Ack>Success</Ack>
+  <Version>869</Version>
+  <Build>E869_CORE_API_16786567_R1</Build>
+  <CategoryArray>
+    <Category>
+      <BestOfferEnabled>true</BestOfferEnabled>
+      <CategoryID>10542</CategoryID>
+      <CategoryLevel>1</CategoryLevel>
+      <CategoryName>Real Estate</CategoryName>
+      <CategoryParentID>10542</CategoryParentID>
+      <LSD>true</LSD>
+    </Category>
+    <Category>
+      <BestOfferEnabled>true</BestOfferEnabled>
+      <CategoryID>15825</CategoryID>
+      <CategoryLevel>2</CategoryLevel>
+      <CategoryName>Commercial</CategoryName>
+      <CategoryParentID>10542</CategoryParentID>
+      <LeafCategory>true</LeafCategory>
+      <LSD>true</LSD>
+    </Category>
+    <Category>
+      <BestOfferEnabled>true</BestOfferEnabled>
+      <CategoryID>15841</CategoryID>
+      <CategoryLevel>2</CategoryLevel>
+      <CategoryName>Land</CategoryName>
+      <CategoryParentID>10542</CategoryParentID>
+      <LeafCategory>true</LeafCategory>
+      <LSD>true</LSD>
+    </Category>
+    <Category>
+      <BestOfferEnabled>true</BestOfferEnabled>
+      <CategoryID>94825</CategoryID>
+      <CategoryLevel>2</CategoryLevel>
+      <CategoryName>Manufactured Homes</CategoryName>
+      <CategoryParentID>10542</CategoryParentID>
+      <LeafCategory>true</LeafCategory>
+      <LSD>true</LSD>
+    </Category>
+    <Category>
+      <BestOfferEnabled>true</BestOfferEnabled>
+      <CategoryID>12605</CategoryID>
+      <CategoryLevel>2</CategoryLevel>
+      <CategoryName>Residential</CategoryName>
+      <CategoryParentID>10542</CategoryParentID>
+      <LeafCategory>true</LeafCategory>
+      <LSD>true</LSD>
+    </Category>
+    <Category>
+      <BestOfferEnabled>true</BestOfferEnabled>
+      <CategoryID>15897</CategoryID>
+      <CategoryLevel>2</CategoryLevel>
+      <CategoryName>Timeshares for Sale</CategoryName>
+      <CategoryParentID>10542</CategoryParentID>
+      <LeafCategory>true</LeafCategory>
+      <LSD>true</LSD>
+    </Category>
+    <Category>
+      <BestOfferEnabled>true</BestOfferEnabled>
+      <CategoryID>1607</CategoryID>
+      <CategoryLevel>2</CategoryLevel>
+      <CategoryName>Other Real Estate</CategoryName>
+      <CategoryParentID>10542</CategoryParentID>
+      <LeafCategory>true</LeafCategory>
+      <LSD>true</LSD>
+    </Category>
+  </CategoryArray>
+  <CategoryCount>7</CategoryCount>
+  <UpdateTime>2014-02-28T04:21:54.000Z</UpdateTime>
+  <CategoryVersion>108</CategoryVersion>
+  <ReservePriceAllowed>true</ReservePriceAllowed>
+  <MinimumReservePrice>0.0</MinimumReservePrice>
+</GetCategoriesResponse>
