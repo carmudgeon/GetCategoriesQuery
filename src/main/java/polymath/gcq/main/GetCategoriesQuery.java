@@ -37,11 +37,10 @@ public class GetCategoriesQuery {
 				System.out.println("Rebuild: " + rebuild);
 				CategoryManager.rebuildDataBase();
 				CategoryManager.populateDataBase();
+				
 			} else if (info != null && !info.isEmpty()) {
 				// print info about the given category
-				System.out.println("Info: " + info);
-//				CategoryFinder cf = new CategoryFinder();
-//				cf.findAndPrint(info);	
+				CategoryManager.getCategoryInfo(info);
 				
 			} else {
 				System.exit(1);

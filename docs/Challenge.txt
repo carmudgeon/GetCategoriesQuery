@@ -1,0 +1,98 @@
+Polymath Ventures Engineering Challenge, April 2014
+
+
+I. Overview
+
+The purpose of the challenge is for you to demonstrate your programming chops in the context of solving a "real-world" 
+problem. You may use any programming language you want to perform the task, and we encourage you to use the language in which 
+you're most comfortable. The task is not complex algorithmically. Solutions will be assessed on the basis of their design, 
+code quality and of course correctness. Performance is not a top concern, though it should not be completely ignored. Solutions 
+should include a basic test suite. 
+
+The challenge is in two parts:
+1. Use the GetCategories API from eBay.com to download the entire category tree and store it in a SQLite database. The design
+   of the database schema is up to you.
+2. Once the database has been built, use it to query basic information about a given category.
+
+Your solution should be runnable from the command line and operate in two modes corresponding to the tasks above:
+1. When given the command-line argument "--rebuild" it should download the category tree and create the SQLite database. If 
+   the database already exists it should first be deleted.
+2. When given the command-line argument "--info <category_id>" it should print basic information about the category with 
+   the given ID. This should include the name of the category, its level in the tree, and the path from it to its top-level 
+   ancestor. If the database does not exist or no category with the given ID could be found the program should exit with an 
+   error.
+
+
+II GetCategories API
+
+The GetCategories eBay API is documented here:
+
+http://developer.ebay.com/DevZone/XML/docs/reference/ebay/GetCategories.html
+
+There is a fair amount to read on this page, and learning how to use this API is part of the challenge. However, you SHOULD 
+NOT need to read anything about the eBay API not on this page. If you have questions that are not answered on this page please 
+ask us. In particular, we are providing credentials to access the API so you SHOULD NOT need to register for the eBay Developer 
+Program.
+
+The attached get_categories.sh shell script contains a sample call to the GetCategories API. Please run the script now and
+verify that it works in your environment. If the script does not work, reach out to us so that we can debug it together. Use
+the get_categories.sh script as the basis for your GetCategories API calls. It is very important that you copy the HTTP headers 
+and their values exactly as they appear in the script or your API calls will fail. Carefully copy the authentication token (the 
+long string of gibberish) into your code and use it in your API calls.
+
+Additional notes:
+o The GetCategories API does support SOAP, but we strongly discourage its use. (If you do not know what SOAP is, consider 
+  yourself lucky.)
+o The eBay category tree has a maximum depth of six. There are 34 top-level (level=1) categories. One of them is the category
+  with id 10542 (Real Estate) which is used by the get_categories.sh script.
+o The GetCategories API is quite versatile. It can return the entire tree or one or more subtrees. How you use this API is
+  entirely up to you.
+
+
+III SQLite
+
+SQLite is a SQL database that lives in a single file. The documentation for it can be found here:
+
+https://sqlite.org/
+
+It is a very popular library, and most programming languages contain bindings to it. Part of the challenge is to design a SQL
+schema to store the category tree. You schema may contain one or more tables. For each category please store at least the 
+following attributes:
+
+o CategoryID
+o CategoryName
+o CategoryLevel
+o BestOfferEnabled
+
+
+IV Sample Session
+
+Here is a sample session with the program:
+
+% ./categories --rebuild
+% ./categories --rebuild
+% ./categories --rebuild
+% ./categories --info 179281
+Category ID: 179281
+Name: Tools & Supplies
+Level: 4
+Best Offer Enabled: true
+Ancestors: 47323 (Clubmaking Products), 1513 (Golf), 888 (Sporting Goods
+% ./categories --info 179022
+Category ID: 179022
+Name: Hydroponic Parts & Accessories
+Level: 5
+Best Offer Enabled: true
+Ancestors: 43554 (Hydroponics & Seed Starting), 2032 (Gardening Supplies), 159912 (Yard, Garden & Outdoor Living), 11700 (Home & Garden)
+% ./categories --info 10542
+Category ID: 10542
+Name: Real Estate
+Level: 1
+Best Offer Enabled: None
+Ancestors:
+
+This assumes that the executable is ./categories. Your executable does not need to match this, but it should accept the arguments
+--rebuild and --info and behave similarly. The output of your program does not need to be in the same format as shown here, but it
+should present the same information.
+
+Feel free to add other command-line arguments to your program as you see fit, and don't forget to include some tests!

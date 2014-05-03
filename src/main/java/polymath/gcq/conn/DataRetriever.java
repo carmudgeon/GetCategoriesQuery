@@ -61,12 +61,6 @@ public class DataRetriever {
 			wr.flush();
 			wr.close();
 
-			// int responseCode = con.getResponseCode();
-			// System.out.println("\nSending 'POST' request to URL : " +
-			// EBAYAPI_URL);
-			// System.out.println("Post parameters : " + urlParameters);
-			// System.out.println("Response Code : " + responseCode);
-
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					con.getInputStream()));
 
@@ -74,9 +68,6 @@ public class DataRetriever {
 				response.append(inputLine);
 			}
 			in.close();
-
-			// print result
-			// System.out.println(response.toString());
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,7 +99,6 @@ public class DataRetriever {
 		try {
 			xmlReader = factory.createXMLStreamReader(reader);
 		} catch (XMLStreamException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -131,6 +121,9 @@ public class DataRetriever {
 
 				case XMLStreamConstants.END_ELEMENT:
 					switch (xmlReader.getLocalName()) {
+					case "BestOfferEnabled":
+						currentCat.setBestOfferEnabled(Boolean.parseBoolean(tagContent));
+						break;
 					case "Category":
 						categories.add(currentCat);
 						break;
@@ -155,7 +148,6 @@ public class DataRetriever {
 				}			
 			}
 		} catch (NumberFormatException | XMLStreamException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return categories;
