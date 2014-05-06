@@ -9,7 +9,7 @@
 echo “Get Categories Query Application.”
 #
 #
-jar_file=gcq.jar
+jar_file=categories.jar
 #
 #
 if [ -f $jar_file ]; then

@@ -4,6 +4,7 @@ import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
+import polymath.gcq.conn.DataRetriever;
 import polymath.gcq.db.CategoryManager;
 
 public class GetCategoriesQuery {
@@ -36,7 +37,7 @@ public class GetCategoriesQuery {
 				// execute rebuild process
 				System.out.println("Rebuild: " + rebuild);
 				CategoryManager.rebuildDataBase();
-				CategoryManager.populateDataBase();
+				CategoryManager.populateDataBase(DataRetriever.retrieveCategories());
 				
 			} else if (info != null && !info.isEmpty()) {
 				// print info about the given category

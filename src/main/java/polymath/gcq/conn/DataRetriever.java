@@ -24,15 +24,17 @@ public class DataRetriever {
 	public final static String EBAYAPI_URL = "https://api.sandbox.ebay.com/ws/api.dll";
 	public final static String DATA = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
 			+ "<GetCategoriesRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\">"
-			+ "<CategoryParent>10542</CategoryParent>"
 			+ "<CategorySiteID>0</CategorySiteID>"
-			+ "<ViewAllNodes>True</ViewAllNodes>"
 			+ "<DetailLevel>ReturnAll</DetailLevel>"
 			+ "<RequesterCredentials>"
 			+ "<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**t2XTUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wFk4GhCpaCpQWdj6x9nY+seQ**L0MCAA**AAMAAA**pZOn+3Cb/dnuil4E90EEeGpHlaBVP0VpLebK58TPQ210Sn33HEvjGYoC9UYVqfbhxte6wp8/fPL795uVh9/4X00HC3wAfzcV+wobN2NfReqWAXFdfuj4CbTHEzIHVLJ8tApLPlI8Nxq6oCa5KsZf5L+An85i2BnohCfscJtl9OcZYnyWnD0oA4R3zdnH3dQeKRTxws/SbVCTgWcMXBqL9TUr4CrnOFyt0BdYp4lxg0HbMv1akuz+U7wQ3aLxJeFoUow20kUtVoTIDhnpfZ40Jcl/1a2ui0ha3rl9D3oA66PUhHSnHJTznwtp1pFLANWn9I49l9rrYbzzobB6SGf18LK/5cqSwse3AWMXJkFVbgFM7e5DZBv59S1sCRdEjzw8GciKYSxGDqu8UJQHgL/QPiTFhtj2Ad/vjZ/6PLBVA9rhOxJnlhCvLXmWZIf1NNcckN8uEEIqK7Wn0DdDi8p44ozIWNaIQ319HjYYOBp4a5FLUjwXCamoqfSjYli5ikqe0jwn+LxnOWblY47TFhruRQpYaBAro4VbgirwNYT7RlEGz+u7ol9A873dnqEZgdXWfrWkyxyKGeXHnHjiynfL/JDCdl2U2s+s5iOd8hp6QklHevPOlOtZgW+K/eFIv53UATQi4vMptUKEeD6QxFzvxP7wRAkKIQZUq+LKB8lZBP/Epjni47HXKpwQdgbTWbyfHpSF3A52u8koUY9chiBk1FCpqjBM/BT5tjhIlrQUVeWUUyGeQ49sJJvaeVnaavo9</eBayAuthToken>"
 			+ "</RequesterCredentials>" 
 			+ "</GetCategoriesRequest>";
 
+	/**
+	 * Method used to retrieve the ebay categories
+	 * @return list of Category items already parsed from the retrieved xml
+	 */
 	public static List<Category> retrieveCategories() {
 		String inputLine;
 		StringBuffer response = new StringBuffer();
@@ -40,9 +42,8 @@ public class DataRetriever {
 			URL obj = new URL(EBAYAPI_URL);
 			HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
-			// add reuqest header
+			// add request headers
 			con.setRequestMethod("POST");
-
 			con.setRequestProperty("X-EBAY-API-COMPATIBILITY-LEVEL", "861");
 			con.setRequestProperty("X-EBAY-API-DEV-NAME",
 					"16a26b1b-26cf-442d-906d-597b60c41c19");
@@ -69,20 +70,15 @@ public class DataRetriever {
 			}
 			in.close();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return parseXMLData(response.toString());
 	}
 
 	/**
-	 * <CategoryID>10542</CategoryID> <CategoryLevel>1</CategoryLevel>
-	 * <CategoryName>Real Estate</CategoryName>
-	 * <CategoryParentID>10542</CategoryParentID> <LSD>true</LSD>
-	 * 
+	 * Method used to parse the XML data retrived from the ebay XML API
 	 * @param xml
 	 * @return
 	 * @throws XMLStreamException 
@@ -122,7 +118,7 @@ public class DataRetriever {
 				case XMLStreamConstants.END_ELEMENT:
 					switch (xmlReader.getLocalName()) {
 					case "BestOfferEnabled":
-						currentCat.setBestOfferEnabled(Boolean.parseBoolean(tagContent));
+						currentCat.setBestOfferEnabled(tagContent);
 						break;
 					case "Category":
 						categories.add(currentCat);
@@ -141,7 +137,7 @@ public class DataRetriever {
 								.setCategoryParentID(Integer.parseInt(tagContent));
 						break;
 					case "LSD":
-						currentCat.setLsd(Boolean.parseBoolean(tagContent));
+						currentCat.setLsd(tagContent);
 						break;
 					}
 					break;

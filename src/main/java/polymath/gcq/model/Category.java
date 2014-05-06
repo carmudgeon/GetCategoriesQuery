@@ -1,23 +1,28 @@
 package polymath.gcq.model;
 
+/**
+ * Class that represents an Ebay XML API Category
+ * @author dham
+ *
+ */
 public class Category {
 	
-	private Boolean bestOfferEnabled;
+	private String bestOfferEnabled;
 	private int categoryID;
 	private int categoryLevel;
 	private String categoryName;
 	private int categoryParentID;
-	private Boolean lsd;
+	private String lsd;
 	
 	public Category() {
 		super();
 	}
 
-	public Boolean getBestOfferEnabled() {
+	public String getBestOfferEnabled() {
 		return bestOfferEnabled;
 	}
 
-	public void setBestOfferEnabled(Boolean bestOfferEnabled) {
+	public void setBestOfferEnabled(String bestOfferEnabled) {
 		this.bestOfferEnabled = bestOfferEnabled;
 	}
 
@@ -53,12 +58,23 @@ public class Category {
 		this.categoryParentID = categoryParentID;
 	}
 
-	public Boolean getLsd() {
+	public String getLsd() {
 		return lsd;
 	}
 
-	public void setLsd(Boolean lsd) {
+	public void setLsd(String lsd) {
 		this.lsd = lsd;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [bestOfferEnabled=" + bestOfferEnabled
+				+ ", categoryID=" + categoryID + ", categoryLevel="
+				+ categoryLevel + ", categoryName=" + categoryName
+				+ ", categoryParentID=" + categoryParentID + ", lsd=" + lsd
+				+ "]";
+	}
+	
+	
 
 }
